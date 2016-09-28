@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import EmojiPicker from './src/picker';
+import FavsLoader from './src/favs-loader';
 
-const logChoice = function(emoji) {
-  console.log(emoji);
-}
 
-ReactDOM.render(<EmojiPicker onChange={logChoice} />, document.getElementById('example1'));
+ReactDOM.render( 
+    <FavsLoader source="https://api.github.com/users/octocat/gists" />,
+    document.getElementById('example1'));
 
-ReactDOM.render(<EmojiPicker search={true} onChange={logChoice} />, document.getElementById('example2'));
+ReactDOM.render(
+    <FavsLoader source="https://api.github.com/users/octocat/gists" search={true} />,
+    document.getElementById('example2'));
+
+

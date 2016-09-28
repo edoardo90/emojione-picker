@@ -1,0 +1,16 @@
+{
+  "name": "mockup-server",
+  "version": "1.0.0",
+  "description": "a mockup server used to emulate a basic API to provide user favourite emoticons",
+  "main": "mock-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mock",
+    "emoji",
+    "api"
+  ],
+  "author": "edoardo pasi",
+  "license": "GPL-3.0"
+}

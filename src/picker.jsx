@@ -71,7 +71,7 @@ const Picker = React.createClass({
 
     getInitialState: function() {
       return {
-        modifier: store.get('emoji-modifier') || 0   ,
+        modifier: store.get('emoji-modifier') || 0 + 0,
         rendered: 0,
         category: false,
         term: this.props.search !== true ? this.props.search : ""
@@ -110,8 +110,8 @@ const Picker = React.createClass({
                   "aliases_ascii":[":')",":'-)"],
                   "keywords":["happy","silly","smiley","cry","laugh","laugh","emotion","emotion","sarcastic","sarcastic"]}};
 
-      var strategy1 = Object.assign({}, strategy, oo, o1);
 
+      var strategy1 = Object.assign({}, strategy, this.props.favourites.oo);
       this.setState({emojis: this.emojisFromStrategy(strategy1)});
     },
 
@@ -210,6 +210,7 @@ const Picker = React.createClass({
       const headers = [];
       const jumpToCategory = this.jumpToCategory;
 
+
       each(this.props.categories, (details, key) => {
         headers.push(<li key={key} className={this.state.category === key ? "active" : ""}>
           <Emoji
@@ -239,12 +240,17 @@ const Picker = React.createClass({
       const {term, modifier} = this.state;
       let i = 0;
 
+      var s1 = this.state.emojis;
+      var strategy1 = Object.assign({}, strategy, this.props.favourites);
+        console.log("dancers 2 ", this.props.favourites);
+      s1 =  this.emojisFromStrategy(strategy1);
+
       // render emoji in category sized chunks to help prevent UI lockup
       each(this.props.categories, (category, key) => {
         if(key === "favourites"){
           console.log("key = favs");
         }
-        let list = this.state.emojis[key];
+        let list = s1[key];
         if (list && Object.keys(list).length && i < this.state.rendered) {
           list = map(list, function(data){
             const modified = modifier && data[modifier] ? data[modifier] : data[0];
@@ -329,7 +335,7 @@ const Picker = React.createClass({
       let classes = 'emoji-dialog';
       if (this.props.search === true) classes += ' with-search';
 
-      return <div className={classes} role="dialog">
+        return <div className={classes} role="dialog">
         <header className="emoji-dialog-header" role="menu">
           <ul onBlur={this.setFocus}>{this.renderCategories()}</ul>
         </header>
