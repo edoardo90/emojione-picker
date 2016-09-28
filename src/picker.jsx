@@ -58,14 +58,20 @@ const Picker = React.createClass({
           flags: {
             title: 'Flags',
             emoji: 'flag_gb'
+          },
+
+          favourites: {
+            title: 'Frequently',
+            emoji: 'yellow_heart'
           }
+
         }
       }
     },
 
     getInitialState: function() {
       return {
-        modifier: store.get('emoji-modifier') || 0,
+        modifier: store.get('emoji-modifier') || 0   ,
         rendered: 0,
         category: false,
         term: this.props.search !== true ? this.props.search : ""
@@ -76,7 +82,37 @@ const Picker = React.createClass({
       each(this.props.emojione, (value, key) => {
         emojione[key] = value;
       });
-      this.setState({emojis: this.emojisFromStrategy(strategy)});
+
+      //
+      var oo =
+      {"dancers2":
+          {"unicode":"1f46f",
+            "unicode_alternates":"",
+            "name":"woman with bunny ears",
+            "shortname":":dancers:",
+            "category":"favourites",
+            "emoji_order":"142",
+            "aliases":[],
+            "aliases_ascii":[],
+            "keywords":["people","women","sexy","girls night","girls night","boys night","boys night","parties","parties","dance","dance"]}
+      };
+
+      //
+      var o1 = {"joy2":
+                {
+                  "unicode":"1f602",
+                  "unicode_alternates":"",
+                  "name":"face with tears of joy",
+                  "shortname":":joy:",
+                  "category":"favourites",
+                  "emoji_order":"4",
+                  "aliases":[],
+                  "aliases_ascii":[":')",":'-)"],
+                  "keywords":["happy","silly","smiley","cry","laugh","laugh","emotion","emotion","sarcastic","sarcastic"]}};
+
+      var strategy1 = Object.assign({}, strategy, oo, o1);
+
+      this.setState({emojis: this.emojisFromStrategy(strategy1)});
     },
 
     componentDidMount: function() {
@@ -205,6 +241,9 @@ const Picker = React.createClass({
 
       // render emoji in category sized chunks to help prevent UI lockup
       each(this.props.categories, (category, key) => {
+        if(key === "favourites"){
+          console.log("key = favs");
+        }
         let list = this.state.emojis[key];
         if (list && Object.keys(list).length && i < this.state.rendered) {
           list = map(list, function(data){
@@ -233,11 +272,22 @@ const Picker = React.createClass({
             }
           });
 
+          //looks in the state (populated from .json in the beginning) for all the emojis in a certain category
+          // if emojis are present in that category, they are put inside UL
+
+          // !   most frequently used emojis cannot be read from a json but elsewhere
+
           if (compact(list).length) {
-            sections.push(<div className="emoji-category" key={key} ref={key}>
-              <h2 ref={category.title} tabIndex="0" className="emoji-category-header">{category.title}</h2>
-              <ul className="emoji-category-list">{list}</ul>
-            </div>);
+            sections.push(
+                <div className="emoji-category" key={key} ref={key}>
+                  <h2 ref={category.title} tabIndex="0" className="emoji-category-header">{category.title}</h2>
+                  <ul className="emoji-category-list">{list}</ul>
+                </div>
+            );
+
+          }
+          else {
+            console.log("");
           }
 
           i++;

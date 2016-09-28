@@ -1,5 +1,5 @@
 .emoji-dialog {
-  width: 276px;
+  width: 316px;
   height: 220px;
   background: #fff;
   box-sizing: border-box;
@@ -78,6 +78,11 @@
   padding: 4px;
   border-radius: 4px;
 }
+
+.emoji-category {
+  min-height: 162px;
+}
+
 
 .emoji-dialog .emoji-category-header {
   margin-top: 10px;
