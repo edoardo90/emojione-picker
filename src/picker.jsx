@@ -71,7 +71,7 @@ const Picker = React.createClass({
 
     getInitialState: function() {
       return {
-        modifier: store.get('emoji-modifier') || 0 + 0,
+        modifier: store.get('emoji-modifier') || 0,
         rendered: 0,
         category: false,
         term: this.props.search !== true ? this.props.search : ""
@@ -83,36 +83,7 @@ const Picker = React.createClass({
         emojione[key] = value;
       });
 
-      //
-      var oo =
-      {"dancers2":
-          {"unicode":"1f46f",
-            "unicode_alternates":"",
-            "name":"woman with bunny ears",
-            "shortname":":dancers:",
-            "category":"favourites",
-            "emoji_order":"142",
-            "aliases":[],
-            "aliases_ascii":[],
-            "keywords":["people","women","sexy","girls night","girls night","boys night","boys night","parties","parties","dance","dance"]}
-      };
-
-      //
-      var o1 = {"joy2":
-                {
-                  "unicode":"1f602",
-                  "unicode_alternates":"",
-                  "name":"face with tears of joy",
-                  "shortname":":joy:",
-                  "category":"favourites",
-                  "emoji_order":"4",
-                  "aliases":[],
-                  "aliases_ascii":[":')",":'-)"],
-                  "keywords":["happy","silly","smiley","cry","laugh","laugh","emotion","emotion","sarcastic","sarcastic"]}};
-
-
-      var strategy1 = Object.assign({}, strategy, this.props.favourites.oo);
-      this.setState({emojis: this.emojisFromStrategy(strategy1)});
+      this.setState({emojis: this.emojisFromStrategy(strategy)});
     },
 
     componentDidMount: function() {
@@ -240,16 +211,12 @@ const Picker = React.createClass({
       const {term, modifier} = this.state;
       let i = 0;
 
-      var s1 = this.state.emojis;
-      var strategy1 = Object.assign({}, strategy, this.props.favourites);
-        console.log("dancers 2 ", this.props.favourites);
-      s1 =  this.emojisFromStrategy(strategy1);
+      var s0 = this.state.emojis;
+      var sf = this.emojisFromStrategy(this.props.favourites);
+      var s1 = Object.assign(s0, sf);
 
       // render emoji in category sized chunks to help prevent UI lockup
       each(this.props.categories, (category, key) => {
-        if(key === "favourites"){
-          console.log("key = favs");
-        }
         let list = s1[key];
         if (list && Object.keys(list).length && i < this.state.rendered) {
           list = map(list, function(data){
@@ -282,7 +249,6 @@ const Picker = React.createClass({
           // if emojis are present in that category, they are put inside UL
 
           // !   most frequently used emojis cannot be read from a json but elsewhere
-
           if (compact(list).length) {
             sections.push(
                 <div className="emoji-category" key={key} ref={key}>
@@ -291,9 +257,6 @@ const Picker = React.createClass({
                 </div>
             );
 
-          }
-          else {
-            console.log("");
           }
 
           i++;

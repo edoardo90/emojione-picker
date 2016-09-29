@@ -1,8 +1,13 @@
 var express = require('express');
-var app = express();
+var cors = require('cors');
 
-var oo =
-    {"dancers2":
+var app = express();
+app.use(cors());
+
+
+var o =
+  {
+    "dancers":
         {
             "unicode":"1f46f",
             "unicode_alternates":"",
@@ -14,10 +19,8 @@ var oo =
             "aliases_ascii":[],
             "keywords":["people","women","sexy","girls night","girls night","boys night","boys night","parties","parties","dance","dance"]
         }
-    };
-
-var o1 =
-    {"joy2":
+    ,
+    "joy":
         {
             "unicode":"1f602",
             "unicode_alternates":"",
@@ -28,10 +31,35 @@ var o1 =
             "aliases":[],
             "aliases_ascii":[":')",":'-)"],
             "keywords":["happy","silly","smiley","cry","laugh","laugh","emotion","emotion","sarcastic","sarcastic"]
-        }
-    };
+        },
+      "kissing_heart":
+        {
+          "unicode":"1f618",
+          "unicode_alternates":"",
+          "name":"face throwing a kiss",
+          "shortname":":kissing_heart:",
+          "category":"favourites",
+          "emoji_order":"18",
+          "aliases":[],
+          "aliases_ascii":[":*",":-*","=*",":^*"],
+          "keywords":["smiley","love","sexy"]
+        },
+      "smiling_imp":
+      {
+          "unicode":"1f608",
+          "unicode_alternates":"",
+          "name":"smiling face with horns",
+          "shortname":":smiling_imp:",
+          "category":"favourites",
+          "emoji_order":"71",
+          "aliases":[],
+          "aliases_ascii":[],
+          "keywords":["silly","smiley","angry","monster","devil","devil","boys night","boys night"]
+      }
+  };
 
-var strategy1 = Object.assign({}, oo, o1);
+
+var strategy1 = Object.assign({}, o);
 var exampleFavourites = strategy1;
 
 app.get('/', function (req, res) {
