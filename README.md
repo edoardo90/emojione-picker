@@ -9,7 +9,7 @@ Fork of
 I addressed this Issue:
 [Add 'frequently used' section](https://github.com/tommoor/emojione-picker/issues/6)
 
-I added another tab for the favourites emoticons, my hypothesis is that a remote web server ([http://localhost:3000](http://localhost:3000() in my example) gives the component an object containing the favourite emoticons.
+I added another tab for the favourites emoticons, my hypothesis is that a remote web server ([http://localhost:3000](http://localhost:3000) in my example) gives the component an object containing the favourite emoticons.
 
 
 ## Development
