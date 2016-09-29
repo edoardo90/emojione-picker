@@ -12,5 +12,8 @@
     "api"
   ],
   "author": "edoardo pasi",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
